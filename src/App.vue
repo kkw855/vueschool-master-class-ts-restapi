@@ -4,9 +4,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import PageHome from "@/views/PageHome.vue";
-</script>
+<script setup lang="ts"></script>
 
 <style>
 @import "@/assets/style.css";
