@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
+import PageNotFound from "@/views/PageNotFound.vue";
 import PageHome from "@/views/PageHome.vue";
 import PageThreadShow from "@/views/PageThreadShow.vue";
 
@@ -14,6 +15,11 @@ const routes: readonly RouteRecordRaw[] = [
     name: "ThreadShow",
     component: PageThreadShow,
     props: true,
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: PageNotFound,
   },
 ];
 
