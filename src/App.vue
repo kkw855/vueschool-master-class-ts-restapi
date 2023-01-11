@@ -6,4 +6,7 @@
 import PageHome from "@/views/PageHome.vue";
 </script>
 
-<style scoped></style>
+<style>
+@import "@/assets/style.css";
+@import "bootstrap/dist/css/bootstrap.min.css";
+</style>
