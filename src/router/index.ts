@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
-import PageNotFound from "@/views/PageNotFound.vue";
-import PageHome from "@/views/PageHome.vue";
-import PageThreadShow from "@/views/PageThreadShow.vue";
+import PageNotFound from "@/pages/PageNotFound.vue";
+import PageHome from "@/pages/PageHome.vue";
+import PageThreadShow from "@/pages/PageThreadShow.vue";
 import sourceData from "@/data.json";
 import * as A from "fp-ts/Array";
 import * as O from "fp-ts/Option";
