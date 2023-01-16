@@ -1,12 +1,14 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 
-import App from "./App.vue";
-import router from "./router";
+import App from "@/App.vue";
+import router from "@/router";
+import GlobalComponents from "@/globals";
 
-const app = createApp(App);
+const forumApp = createApp(App);
 
-app.use(createPinia());
-app.use(router);
+forumApp.use(createPinia());
+forumApp.use(router);
+forumApp.use(GlobalComponents);
 
-app.mount("#app");
+forumApp.mount("#app");

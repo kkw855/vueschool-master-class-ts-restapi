@@ -34,7 +34,6 @@
 import type Post from "@/types/Post";
 import type User from "@/types/User";
 import sourceData from "@/data.json";
-import AppDate from "@/components/AppDate.vue";
 
 defineProps<{
   posts: Post[];

@@ -45,7 +45,6 @@ import sourceData from "@/data.json";
 import type User from "@/types/User";
 import type Thread from "@/types/Thread";
 import { reactive } from "vue";
-import AppDate from "@/components/AppDate.vue";
 
 defineProps<{
   threads: Thread[];
