@@ -23,11 +23,8 @@
         </div>
       </div>
 
-      <div
-        class="post-date text-faded"
-        :title="humanFriendlyDate(post.publishedAt)"
-      >
-        {{ diffForHumans(post.publishedAt) }}
+      <div class="post-date text-faded">
+        <app-date :timestamp="post.publishedAt" />
       </div>
     </div>
   </div>
@@ -37,12 +34,7 @@
 import type Post from "@/types/Post";
 import type User from "@/types/User";
 import sourceData from "@/data.json";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import localizedFormat from "dayjs/plugin/localizedFormat";
-
-dayjs.extend(relativeTime);
-dayjs.extend(localizedFormat);
+import AppDate from "@/components/AppDate.vue";
 
 defineProps<{
   posts: Post[];
@@ -52,12 +44,6 @@ const users: User[] = sourceData.users;
 
 function userById(userId: string): User | undefined {
   return users.find((u) => u.id === userId);
-}
-function diffForHumans(timestamp: number): string {
-  return dayjs.unix(timestamp).fromNow();
-}
-function humanFriendlyDate(timestamp: number): string {
-  return dayjs.unix(timestamp).format("llll");
 }
 </script>
 
