@@ -23,24 +23,42 @@
         </div>
       </div>
 
-      <div class="post-date text-faded">
-        {{ post.publishedAt }}
+      <div
+        class="post-date text-faded"
+        :title="humanFriendlyDate(post.publishedAt)"
+      >
+        {{ diffForHumans(post.publishedAt) }}
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import sourceData from "@/data.json";
 import type Post from "@/types/Post";
+import type User from "@/types/User";
+import sourceData from "@/data.json";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+
+dayjs.extend(relativeTime);
+dayjs.extend(localizedFormat);
 
 defineProps<{
   posts: Post[];
 }>();
 
-const users = sourceData.users;
+const users: User[] = sourceData.users;
 
-const userById = (userId: string) => users.find((u) => u.id === userId);
+function userById(userId: string): User | undefined {
+  return users.find((u) => u.id === userId);
+}
+function diffForHumans(timestamp: number): string {
+  return dayjs.unix(timestamp).fromNow();
+}
+function humanFriendlyDate(timestamp: number): string {
+  return dayjs.unix(timestamp).format("llll");
+}
 </script>
 
 <style scoped>
