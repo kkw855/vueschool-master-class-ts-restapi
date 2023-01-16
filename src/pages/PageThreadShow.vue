@@ -14,7 +14,7 @@ import PostList from "@/components/PostList.vue";
 import sourceData from "@/data.json";
 import type Post from "@/types/Post";
 import type Thread from "@/types/Thread";
-import { computed, reactive, ref } from "vue";
+import { computed, reactive } from "vue";
 import PostEditor from "@/components/PostEditor.vue";
 import type PostSaveEvent from "@/types/PostSaveEvent";
 
