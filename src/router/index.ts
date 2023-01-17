@@ -7,12 +7,19 @@ import sourceData from "@/data.json";
 import * as A from "fp-ts/Array";
 import * as O from "fp-ts/Option";
 import { pipe } from "fp-ts/function";
+import PageForum from "@/pages/PageForum.vue";
 
 const routes: readonly RouteRecordRaw[] = [
   {
     path: "/",
     name: "Home",
     component: PageHome,
+  },
+  {
+    path: "/forum/:id",
+    name: "Forum",
+    component: PageForum,
+    props: true,
   },
   {
     path: "/thread/:id",
