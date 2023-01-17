@@ -1,12 +1,12 @@
 <template>
   <h1>Welcome to the Forum</h1>
-  <thread-list :threads="threads" />
+  <forum-list :forums="forums" />
 </template>
 
 <script setup lang="ts">
-import ThreadList from "@/components/ThreadList.vue";
+import type Forum from "@/types/Forum";
 import sourceData from "@/data.json";
-import type Thread from "@/types/Thread";
+import ForumList from "@/components/ForumList.vue";
 
-const threads: Thread[] = sourceData.threads;
+const forums: Forum[] = sourceData.forums;
 </script>
