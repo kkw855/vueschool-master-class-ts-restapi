@@ -1,63 +1,49 @@
 <template>
-  <div class="col-large push-top">
-    <h1>
-      {{ thread.title }}
-    </h1>
+  <div class="post-list">
+    <div class="post" v-for="post in posts" :key="post.id">
+      <div class="user-info">
+        <a href="#" class="user-name">{{ userById(post.userId).name }}</a>
 
-    <div class="post-list">
-      <div class="post" v-for="postId in thread.posts" :key="postId">
-        <div class="user-info">
-          <a href="#" class="user-name">{{
-            userById(postById(postId).userId).name
-          }}</a>
+        <a href="#">
+          <img
+            class="avatar-large"
+            :src="userById(post.userId).avatar"
+            alt=""
+          />
+        </a>
 
-          <a href="#">
-            <img
-              class="avatar-large"
-              :src="userById(postById(postId).userId).avatar"
-              alt=""
-            />
-          </a>
+        <p class="desktop-only text-small">107 posts</p>
+      </div>
 
-          <p class="desktop-only text-small">107 posts</p>
+      <div class="post-content">
+        <div>
+          <p>
+            {{ post.text }}
+          </p>
         </div>
+      </div>
 
-        <div class="post-content">
-          <div>
-            <p>
-              {{ postById(postId).text }}
-            </p>
-          </div>
-        </div>
-
-        <div class="post-date text-faded">
-          {{ postById(postId).publishedAt }}
-        </div>
+      <div class="post-date text-faded">
+        <app-date :timestamp="post.publishedAt" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import sourceData from "@/data.json";
 import type Post from "@/types/Post";
 import type User from "@/types/User";
-import type Thread from "@/types/Thread";
-import { computed } from "vue";
+import sourceData from "@/data.json";
 
-const props = defineProps<{
-  id: string;
+defineProps<{
+  posts: Post[];
 }>();
 
-const thread = computed(() => threads.find((t) => t.id === props.id));
-
-const threads: Thread[] = sourceData.threads;
-// json 파일에 포함된 emoji 를 위해서
-const posts: Post[] = JSON.parse(JSON.stringify(sourceData.posts));
 const users: User[] = sourceData.users;
 
-const postById = (postId: string) => posts.find((p) => p.id === postId);
-const userById = (userId: string) => users.find((u) => u.id === userId);
+function userById(userId: string): User | undefined {
+  return users.find((u) => u.id === userId);
+}
 </script>
 
 <style scoped>
@@ -70,8 +56,7 @@ const userById = (userId: string) => users.find((u) => u.id === userId);
   flex-wrap: wrap;
   justify-content: space-between;
   background-color: white;
-  padding: 20px 10px;
-  padding-bottom: 7px;
+  padding: 20px 10px 7px;
   box-shadow: 2px 2px 1px rgba(136, 136, 136, 0.09);
   margin-bottom: 20px;
 }
@@ -103,8 +88,7 @@ const userById = (userId: string) => users.find((u) => u.id === userId);
     justify-content: flex-start;
     background: rgba(73, 89, 96, 0.06);
     margin-right: 0;
-    padding: 5px;
-    padding-left: 10px;
+    padding: 5px 5px 5px 10px;
   }
 
   .post .user-info .avatar-large {
@@ -139,13 +123,13 @@ const userById = (userId: string) => users.find((u) => u.id === userId);
     background: rgba(73, 89, 96, 0.06);
     padding-right: 10px;
     padding-top: 16px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 }
 
 @media (max-width: 720px) {
   .post {
-    padding: 0px;
+    padding: 0;
   }
 }
 
@@ -192,7 +176,7 @@ const userById = (userId: string) => users.find((u) => u.id === userId);
   top: -25px;
   left: -25px;
   font-size: 42px;
-  font-family: FontAwesome;
+  font-family: FontAwesome, serif;
   content: "\f10e";
   color: #263959;
 }
@@ -243,7 +227,7 @@ const userById = (userId: string) => users.find((u) => u.id === userId);
   top: -20px;
   left: -20px;
   font-size: 42px;
-  font-family: FontAwesome;
+  font-family: FontAwesome, serif;
   content: "\f10e";
   color: #263959;
 }
@@ -290,7 +274,7 @@ const userById = (userId: string) => users.find((u) => u.id === userId);
 
 .post-content blockquote.simple {
   position: relative;
-  padding: 0px 10px 0px 20px;
+  padding: 0 10px 0 20px;
   font-weight: 100;
   font-style: italic;
   font-size: 17px;
@@ -302,7 +286,7 @@ const userById = (userId: string) => users.find((u) => u.id === userId);
   top: -25px;
   left: -25px;
   font-size: 42px;
-  font-family: FontAwesome;
+  font-family: FontAwesome, serif;
   content: "\f10e";
   color: #263959;
 }
