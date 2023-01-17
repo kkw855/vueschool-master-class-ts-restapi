@@ -2,7 +2,13 @@
   <div class="col-full">
     <div class="forum-list">
       <h2 class="list-title">
-        <a href="#">Forums</a>
+        <router-link
+          v-if="categoryId"
+          :to="{ name: 'Category', params: { id: categoryId } }"
+        >
+          {{ title }}
+        </router-link>
+        <span v-else>{{ title }}</span>
       </h2>
 
       <div v-for="forum in forums" :key="forum.id" class="forum-listing">
@@ -10,8 +16,8 @@
           <router-link
             class="text-xlarge"
             :to="{ name: 'Forum', params: { id: forum.id } }"
-            >{{ forum.name }}</router-link
-          >
+            >{{ forum.name }}
+          </router-link>
           <p>{{ forum.description }}</p>
         </div>
 
@@ -33,10 +39,15 @@ import type Forum from "@/types/Forum";
 import * as O from "fp-ts/Option";
 import { pipe } from "fp-ts/function";
 
-// eslint-disable-next-line functional/no-expression-statement
-defineProps<{
+interface Props {
+  title: string;
+  categoryId?: string;
   forums: Forum[];
-}>();
+}
+// eslint-disable-next-line functional/no-expression-statement
+withDefaults(defineProps<Props>(), {
+  title: "Forums",
+});
 
 function forumThreadsWord(forum: Forum) {
   return pipe(
